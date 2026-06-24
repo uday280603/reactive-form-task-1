@@ -1,0 +1,323 @@
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="userForm" (ngSubmit)="onAddUser()">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h3 class="font-weight-bold">Personal Info</h3>
+          <div formGroupName="personalInfo">
+            <div class="form-group">
+              <label for="userName">User Name*</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="firstName"
+              />
+              <strong
+                *ngIf="
+                  c['personalInfo'].get('firstName')?.touched &&
+                  c['personalInfo'].get('firstName')?.hasError('required')
+                "
+                class="text-danger"
+                >Enter user name...!</strong
+              >
+              <strong
+                *ngIf="
+                  c['personalInfo'].get('firstName')?.dirty &&
+                  c['personalInfo'].get('firstName')?.hasError('minlength')
+                "
+                class="text-danger"
+                >User name must have minimum
+                {{
+                  c["personalInfo"].get("firstName")?.errors?.["minlength"]
+                    .requiredLength
+                }}
+                length and actual length is
+                {{
+                  c["personalInfo"].get("firstName")?.errors?.["minlength"]
+                    .actualLength
+                }}
+              </strong>
+              <strong
+                *ngIf="
+                  c['personalInfo'].get('firstName')?.dirty &&
+                  c['personalInfo'].get('firstName')?.hasError('maxlength')
+                "
+                class="text-danger"
+                >User name maxmimum lenth is
+                {{
+                  c["personalInfo"].get("firstName")?.errors?.["maxlength"]
+                    .requiredLength
+                }}
+                actual length is
+                {{
+                  c["personalInfo"].get("firstName")?.errors?.["maxlength"]
+                    .actualLength
+                }}</strong
+              >
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name*</label>
+              <input
+                id="lastName"
+                type="text"
+                class="form-control"
+                formControlName="lastName"
+              />
+              <strong
+                *ngIf="
+                  c['personalInfo'].get('lastName')?.touched &&
+                  c['personalInfo'].get('lastName')?.hasError('required')
+                "
+                class="text-danger"
+                >Enter Last Name...!</strong
+              >
+              <strong
+                *ngIf="
+                  c['personalInfo'].get('lastName')?.dirty &&
+                  c['personalInfo'].get('lastName')?.hasError('minlength')
+                "
+                class="text-danger"
+                >last name must have minimum
+                {{
+                  c["personalInfo"].get("lastName")?.errors?.["minlength"]
+                    .requiredLength
+                }}
+                length and actual length is
+                {{
+                  c["personalInfo"].get("lastName")?.errors?.["minlength"]
+                    .actualLength
+                }}
+              </strong>
+              <strong
+                *ngIf="
+                  c['personalInfo'].get('lastName')?.dirty &&
+                  c['personalInfo'].get('lastName')?.hasError('maxlength')
+                "
+                class="text-danger"
+                >last name maxmimum length is
+                {{
+                  c["personalInfo"].get("lastName")?.errors?.["maxlength"]
+                    .requiredLength
+                }}
+                actual length is
+                {{
+                  c["personalInfo"].get("lastName")?.errors?.["maxlength"]
+                    .actualLength
+                }}.</strong
+              >
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone*</label>
+              <input type="text" class="form-control" formControlName="phone" />
+              <strong
+                *ngIf="
+                  c['personalInfo'].get('phone')?.touched &&
+                  c['personalInfo'].get('phone')?.hasError('required')
+                "
+                class="text-danger"
+                >Enter phone number..!</strong
+              >
+              <strong
+                *ngIf="
+                  c['personalInfo'].get('phone')?.dirty &&
+                  c['personalInfo'].get('phone')?.hasError('pattern')
+                "
+                class="text-danger"
+                >Enter valid number , dont use aplhabate's and special
+                characters..!</strong
+              >
+              <strong
+                *ngIf="
+                  c['personalInfo'].get('phone')?.dirty &&
+                  c['personalInfo'].get('phone')?.hasError('minlength')
+                "
+                class="text-danger"
+                >Enter at least
+                {{
+                  c["personalInfo"].get("phone")?.errors?.["minlength"]
+                    .requiredLength
+                }}
+                numbers..!</strong
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h3 class="font-weight-bold">Account Details</h3>
+          <div formGroupName="account">
+            <div class="form-group">
+              <label for="email">Email*</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="email"
+                id="email"
+              />
+              <strong
+                *ngIf="
+                  c['account'].get('email')?.touched &&
+                  c['account'].get('email')?.hasError('required')
+                "
+                class="text-danger"
+                >Email is required field...!</strong
+              >
+              <strong
+                *ngIf="
+                  c['account'].get('email')?.dirty &&
+                  c['account'].get('email')?.hasError('pattern')
+                "
+                class="text-danger"
+                >Enter valid email(Ex : ronak@gmail.com)..!</strong
+              >
+              <strong *ngIf="c['account'].get('email')?.pending">
+                <div class="spinner-border" role="status">
+                  <span class="sr-only">Loading..!</span>
+                </div>
+                Checking for email
+              </strong>
+              <strong
+                *ngIf="c['account'].get('email')?.valid"
+                class="text-success"
+              >
+                You can use this email..!</strong
+              >
+              <strong
+                *ngIf="c['account'].get('email')?.hasError('emailExist')"
+                class="text-danger"
+              >
+                {{ c["account"].get("email")?.errors?.["emailExist"] }}
+              </strong>
+            </div>
+            <div class="form-group">
+              <label for="password">Password*</label>
+              <input
+                id="password"
+                type="text"
+                class="form-control"
+                formControlName="password"
+              />
+              <strong
+                *ngIf="
+                  c['account'].get('password')?.touched &&
+                  c['account'].get('password')?.hasError('required')
+                "
+                class="text-danger"
+                >Enter password..it is necessary!!</strong
+              >
+              <strong
+                *ngIf="
+                  c['account'].get('password')?.dirty &&
+                  c['account'].get('password')?.hasError('pattern')
+                "
+                class="text-danger"
+                >Enter valid password, it must contain 1 alphabate , 1 special
+                character , 1 digit and password must have length of 8.</strong
+              >
+            </div>
+            <div class="form-group">
+              <label for="confirmPassword">Confirm Password*</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="confirmPassword"
+                id="confirmPassword"
+              />
+              <strong
+                *ngIf="
+                  c['account'].get('confirmPassword')?.touched &&
+                  c['account'].get('confirmPassword')?.hasError('required')
+                "
+                class="text-danger"
+                >Enter confirm password..!</strong
+              >
+              <strong
+                *ngIf="
+                  c['account'].get('confirmPassword')?.dirty &&
+                  c['account'].get('confirmPassword')?.errors?.[
+                    'passwordMismatch'
+                  ]
+                "
+                class="text-danger"
+              >
+                {{
+                  c["account"].get("confirmPassword")?.errors?.[
+                    "passwordMismatch"
+                  ]
+                }}
+              </strong>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h3 class="font-weight-bold">Profile Details</h3>
+          <div formGroupName="profile">
+            <div class="form-group">
+              <label for="bio">Bio*</label>
+              <textarea
+                type="text"
+                class="form-control"
+                formControlName="bio"
+                id="bio"
+              ></textarea>
+              <strong
+                *ngIf="
+                  c['profile'].get('bio')?.touched &&
+                  c['profile'].get('bio')?.hasError('required')
+                "
+                class="text-danger"
+                >Enter your bio..!</strong
+              >
+              <strong
+                *ngIf="
+                  c['profile'].get('bio')?.dirty &&
+                  c['profile'].get('bio')?.hasError('minlength')
+                "
+                class="text-danger"
+                >Bio length must have minimim
+                {{
+                  c["profile"].get("bio")?.errors?.["minlength"].requiredLength
+                }}
+                and actual lenght is
+                {{
+                  c["profile"].get("bio")?.errors?.["minlength"].actualLength
+                }}.
+              </strong>
+            </div>
+            <div class="form-group">
+              <label for="website">Website*</label>
+              <input
+                id="website"
+                type="text"
+                class="form-control"
+                formControlName="website"
+              />
+              <strong
+                *ngIf="
+                  c['profile'].get('website')?.touched &&
+                  c['profile'].get('website')?.hasError('required')
+                "
+                class="text-danger"
+              >
+                Website is required filed..!
+              </strong>
+              <strong
+                *ngIf="
+                  c['profile'].get('website')?.dirty &&
+                  c['profile'].get('website')?.hasError('pattern')
+                "
+                class="text-danger"
+              >
+                Enter valid wensite link(Ex : www.flipkart.com).
+              </strong>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-block btn-primary" type="submit">Register</button>
+    </form>
+  </div>
+</div>
